@@ -1,0 +1,251 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Fatima ❤️</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Georgia, serif;
+  background: linear-gradient(135deg, #ffe0e6, #f8b9cb, #d9a5c5);
+}
+
+/* الخلفية المتحركة */
+#background {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.bubble {
+  position: absolute;
+  bottom: -100px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.25);
+  border: 1px solid rgba(255,255,255,.5);
+  animation: rise linear infinite;
+}
+
+.heart {
+  position: absolute;
+  bottom: -60px;
+  animation: rise linear infinite;
+  opacity: .8;
+}
+
+@keyframes rise {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0;
+  }
+  15% { opacity: .8; }
+  100% {
+    transform: translateY(-120vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* بطاقة التهنئة */
+.card {
+  position: relative;
+  z-index: 2;
+  width: 90%;
+  max-width: 550px;
+  padding: 55px 25px;
+  text-align: center;
+  background: rgba(255,255,255,.75);
+  backdrop-filter: blur(12px);
+  border: 2px solid rgba(255,255,255,.8);
+  border-radius: 25px;
+  box-shadow: 0 15px 50px rgba(143,55,91,.2);
+  animation: appear 1.5s ease;
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: scale(.7);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.cake {
+  font-size: 65px;
+  margin-bottom: 20px;
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  50% { transform: translateY(-10px); }
+}
+
+h1 {
+  color: #bd5277;
+  font-size: clamp(30px, 8vw, 48px);
+  margin-bottom: 15px;
+}
+
+.name {
+  color: #a33e69;
+  font-size: clamp(35px, 9vw, 55px);
+  font-style: italic;
+  margin-bottom: 20px;
+}
+
+.message {
+  color: #77505f;
+  font-size: 17px;
+  line-height: 1.9;
+}
+
+.line {
+  width: 80px;
+  height: 3px;
+  background: #e68ba9;
+  margin: 20px auto;
+  border-radius: 5px;
+}
+
+button {
+  margin-top: 25px;
+  padding: 13px 28px;
+  border: none;
+  border-radius: 30px;
+  background: #cf668c;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: .3s;
+}
+
+button:hover {
+  background: #a9436c;
+  transform: scale(1.05);
+}
+
+#surprise {
+  display: none;
+  color: #a33e69;
+  margin-top: 20px;
+  font-size: 18px;
+  line-height: 1.8;
+  animation: appear 1s;
+}
+
+.signature {
+  margin-top: 25px;
+  color: #b56d89;
+  font-size: 13px;
+}
+</style>
+</head>
+
+<body>
+
+<div id="background"></div>
+
+<div class="card">
+
+  <div class="cake">🎂</div>
+
+  <h1>Happy Birthday</h1>
+
+  <div class="name">Fatima ❤️</div>
+
+  <div class="line"></div>
+
+  <div class="message">
+    Aujourd'hui est un jour spécial...<br>
+    Une belle personne célèbre son anniversaire !<br><br>
+
+    Je te souhaite une vie remplie de bonheur,
+    d'amour, de réussite et de magnifiques surprises.
+    Que tous tes rêves deviennent réalité. 💗
+  </div>
+
+  <button onclick="showSurprise()">
+    Clique ici pour une surprise 🎁
+  </button>
+
+  <div id="surprise">
+    💕 Tu mérites tout le bonheur du monde ! 💕
+    <br>
+    N'oublie jamais de sourire.
+    <br>
+    Joyeux anniversaire Fatima ! 🌹
+  </div>
+
+  <div class="signature">
+    Made with love ♡
+  </div>
+
+</div>
+
+<script>
+
+// إنشاء الفقاعات والقلوب
+const background = document.getElementById("background");
+
+function createBubble() {
+  const bubble = document.createElement("div");
+
+  bubble.className = "bubble";
+
+  const size = Math.random() * 45 + 15;
+
+  bubble.style.width = size + "px";
+  bubble.style.height = size + "px";
+  bubble.style.left = Math.random() * 100 + "%";
+  bubble.style.animationDuration = (5 + Math.random() * 8) + "s";
+
+  background.appendChild(bubble);
+
+  setTimeout(() => bubble.remove(), 14000);
+}
+
+function createHeart() {
+  const heart = document.createElement("div");
+
+  heart.className = "heart";
+  heart.innerHTML = ["❤️","💕","💗","💖","🌸"][
+    Math.floor(Math.random() * 5)
+  ];
+
+  heart.style.left = Math.random() * 100 + "%";
+  heart.style.fontSize = (15 + Math.random() * 25) + "px";
+  heart.style.animationDuration = (6 + Math.random() * 7) + "s";
+
+  background.appendChild(heart);
+
+  setTimeout(() => heart.remove(), 14000);
+}
+
+setInterval(createBubble, 400);
+setInterval(createHeart, 650);
+
+// زر المفاجأة
+function showSurprise() {
+  document.getElementById("surprise").style.display = "block";
+}
+
+</script>
+
+</body>
+</html>
