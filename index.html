@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Happy Birthday Fatima ❤️</title>
+<title>this is for u 🎂</title>
 
 <style>
 * {
@@ -14,84 +14,106 @@
 }
 
 body {
+  overflow: hidden;
   height: 100vh;
-  overflow: hidden;
   display: flex;
-  align-items: center;
   justify-content: center;
-  font-family: Georgia, serif;
-  background: linear-gradient(135deg, #ffe0e6, #f5b5ca, #d9a5c5);
+  align-items: center;
+  background: linear-gradient(270deg, #ff0080, #7928ca, #00c6ff);
+  background-size: 600% 600%;
+  animation: bgMove 10s ease infinite;
+  font-family: Arial, sans-serif;
+  color: white;
+  text-align: center;
 }
 
-#background {
-  position: fixed;
-  inset: 0;
-  overflow: hidden;
+@keyframes bgMove {
+  0% {background-position: 0% 50%;}
+  50% {background-position: 100% 50%;}
+  100% {background-position: 0% 50%;}
 }
 
-.bubble, .heart {
-  position: absolute;
-  bottom: -80px;
-  animation: rise linear infinite;
+.content {
+  position: relative;
+  z-index: 5;
+  padding: 20px;
 }
 
+h1 {
+  font-size: clamp(30px, 7vw, 50px);
+  animation: bounce 1.5s infinite;
+  text-shadow: 0 0 20px #ffffff80;
+}
+
+p {
+  font-size: 20px;
+  margin-top: 20px;
+}
+
+@keyframes bounce {
+  0%, 100% {transform: translateY(0);}
+  50% {transform: translateY(-20px);}
+}
+
+/* الفقاعات */
 .bubble {
+  position: fixed;
+  bottom: -100px;
   border-radius: 50%;
-  background: rgba(255,255,255,.3);
-  border: 1px solid rgba(255,255,255,.6);
+  background: rgba(255,255,255,0.18);
+  border: 1px solid rgba(255,255,255,0.5);
+  box-shadow: inset 0 0 15px rgba(255,255,255,0.2);
+  animation: floatUp linear infinite;
+  pointer-events: none;
 }
 
-.heart {
-  font-size: 25px;
-}
-
-@keyframes rise {
+@keyframes floatUp {
   0% {
-    transform: translateY(0) rotate(0);
+    transform: translateY(0) scale(0.8);
     opacity: 0;
   }
-  20% { opacity: .8; }
+  20% {opacity: 0.8;}
+  100% {
+    transform: translateY(-120vh) scale(1.3);
+    opacity: 0;
+  }
+}
+
+/* القلوب */
+.heart {
+  position: fixed;
+  bottom: -60px;
+  font-size: 25px;
+  animation: heartUp linear infinite;
+  pointer-events: none;
+}
+
+@keyframes heartUp {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0;
+  }
+  20% {opacity: 1;}
   100% {
     transform: translateY(-120vh) rotate(360deg);
     opacity: 0;
   }
 }
 
-.card {
-  position: relative;
-  z-index: 2;
-  text-align: center;
-  padding: 30px;
-  animation: appear 2s ease;
+/* Confetti */
+.confetti {
+  position: fixed;
+  width: 9px;
+  height: 9px;
+  top: -15px;
+  animation: fall linear forwards;
+  pointer-events: none;
 }
 
-.cake {
-  font-size: 75px;
-  margin-bottom: 25px;
-}
-
-h1 {
-  font-size: clamp(38px, 10vw, 65px);
-  color: #bd5277;
-  font-weight: normal;
-  margin-bottom: 20px;
-}
-
-.name {
-  font-size: clamp(45px, 12vw, 75px);
-  color: #a33e69;
-  font-style: italic;
-  text-shadow: 2px 4px 15px #ffffff80;
-}
-
-@keyframes appear {
-  from {
-    opacity: 0;
-    transform: scale(.7);
-  }
+@keyframes fall {
   to {
-    opacity: 1;
-    transform: scale(1);
+    transform: translateY(110vh) rotate(720deg);
+    opacity: 0;
   }
 }
 </style>
@@ -99,44 +121,68 @@ h1 {
 
 <body>
 
-<div id="background"></div>
-
-<div class="card">
-  <div class="cake">🎂</div>
-  <h1>Happy Birthday</h1>
-  <div class="name">Fatima ❤️</div>
+<div class="content">
+  <h1>🎉 Happy Birthday 🎉</h1>
+  <p>Fatima ❤️</p>
+  <p>Best wishes for you 💖</p>
 </div>
 
 <script>
-const bg = document.getElementById("background");
 
+// إنشاء الفقاعات
 function createBubble() {
-  const b = document.createElement("div");
-  b.className = "bubble";
+  const bubble = document.createElement("div");
+  bubble.className = "bubble";
 
-  let size = Math.random() * 45 + 15;
-  b.style.width = size + "px";
-  b.style.height = size + "px";
-  b.style.left = Math.random() * 100 + "vw";
-  b.style.animationDuration = (5 + Math.random() * 7) + "s";
+  const size = Math.random() * 50 + 15;
 
-  bg.appendChild(b);
-  setTimeout(() => b.remove(), 13000);
+  bubble.style.width = size + "px";
+  bubble.style.height = size + "px";
+  bubble.style.left = Math.random() * 100 + "vw";
+  bubble.style.animationDuration = (6 + Math.random() * 7) + "s";
+
+  document.body.appendChild(bubble);
+
+  setTimeout(() => bubble.remove(), 14000);
 }
 
+// إنشاء القلوب
 function createHeart() {
-  const h = document.createElement("div");
-  h.className = "heart";
-  h.innerHTML = ["❤️","💕","💗","💖"][Math.floor(Math.random()*4)];
-  h.style.left = Math.random() * 100 + "vw";
-  h.style.animationDuration = (6 + Math.random() * 6) + "s";
+  const heart = document.createElement("div");
+  heart.className = "heart";
 
-  bg.appendChild(h);
-  setTimeout(() => h.remove(), 13000);
+  const hearts = ["❤️", "💕", "💗", "💖", "💘", "💜"];
+
+  heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.animationDuration = (5 + Math.random() * 7) + "s";
+
+  document.body.appendChild(heart);
+
+  setTimeout(() => heart.remove(), 13000);
 }
 
-setInterval(createBubble, 400);
-setInterval(createHeart, 600);
+// إنشاء Confetti
+function createConfetti() {
+  const confetti = document.createElement("div");
+  confetti.className = "confetti";
+
+  confetti.style.left = Math.random() * 100 + "vw";
+  confetti.style.backgroundColor =
+    "hsl(" + Math.random() * 360 + ", 100%, 70%)";
+
+  confetti.style.animationDuration = (3 + Math.random() * 3) + "s";
+
+  document.body.appendChild(confetti);
+
+  setTimeout(() => confetti.remove(), 6000);
+}
+
+// تشغيل المؤثرات باستمرار
+setInterval(createBubble, 350);
+setInterval(createHeart, 500);
+setInterval(createConfetti, 150);
+
 </script>
 
 </body>
